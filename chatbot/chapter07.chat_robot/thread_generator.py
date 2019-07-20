@@ -5,15 +5,15 @@ from queue import Queue
 
 
 class ThreadedGenerator(object):
-    def __init__(self, iterator, sentinel=object(),
-                 queue_maxsize=0, daemon=False):
+    # daemon模式默认false，那么主线程会等到子线程全结束了再停，否则主线程一结束就关闭。
+    def __init__(self, iterator, sentinel=object(), queue_maxsize=0, daemon=False):
 
         self._iterator = iterator
         self._sentinel = sentinel
         self._queue = Queue(maxsize=queue_maxsize)
         self._thread = Thread(
-            name=repr(iterator),
-            target=self._run
+            name=repr(iterator), # repr() 函数将对象转化为供解释器读取的形式。
+            target=self._run     # run开始执行线程
         )
         self._thread.daemon = daemon
         self._started = False
@@ -40,7 +40,7 @@ class ThreadedGenerator(object):
         except:
             pass
 
-    def __iter__(self):
+    def __iter__(self):   # 迭代器
         self._started = True
         self._thread.start()
         for value in iter(self._queue.get, self._sentinel):
@@ -60,16 +60,18 @@ class ThreadedGenerator(object):
 
 #  测试
 def test():
-    def gene():
+
+    def gene():  # gene是i产生器
         i = 0
         while True:
             yield i
             i += 1
-    t = gene()
-    test = ThreadedGenerator(t)
+
+    t = gene()  # 得到i，那么t是一个生成器
+    test = ThreadedGenerator(t)  # 第一个参数是t，生成器 可迭代对象
 
     for _ in range(10):
-        print(next(test))
+        print(next(test))  #next函数是自己新封装写的，调用。
 
     test.close()
 

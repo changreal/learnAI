@@ -131,11 +131,11 @@ class Seq2Seq(object):
 
     def build_mode(self):
         """
-        1、初始化训练，预测所需要的变量
-        2、构建编码器
-        3、构建解码器
-        4、构建优化器
-        5、保存
+        1. 初始化训练, 预测所需要的变量
+        2. 构建编码器（encoder） build_encoder -> encoder_cell -> build_signal_cell
+        3. 构建解码器（decoder） build_decoder -> decoder_cell -> build_signal_cell
+        4. 构建优化器（optimizer）
+        5. 保存
         :return:
         """
         self.init_placeholder()

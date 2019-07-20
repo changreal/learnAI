@@ -130,6 +130,7 @@ class WordSequence(object):
 def test():
     ws = WordSequence()
     ws.fit([['你', '好', '啊'], ['你', '好', '哦'],['你','不','啊'],['你','桑','师傅'] ],3) # 得到词典
+    # print(len(ws))  # 6
 
     indice = ws.transform(['我', '们', '好','你'])
     print(indice)  # 因为没做hash，所以是这些符号
