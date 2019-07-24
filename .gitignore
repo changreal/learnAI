@@ -1,2 +1,2 @@
 *.idea
-chatbot/chapter07.chat_robot
+/chatbot/chapter07.chat_robot/__pycache__/
