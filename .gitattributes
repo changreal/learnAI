@@ -1,0 +1,2 @@
+nlp_gitbook/ch8/syj_trainCorpus_utf8/syj_trainCorpus_utf8.txt filter=lfs diff=lfs merge=lfs -text
+nlp_gitbook/ch11/poetry_model.h5 filter=lfs diff=lfs merge=lfs -text

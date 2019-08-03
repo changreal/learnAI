@@ -12,6 +12,7 @@ df = pd.read_csv(dir + "nd_course_schedule_info.csv",sep='\t',names=columns)
 #提取关键列
 classes = df['class'].values.tolist()
 classrooms = df['classroom'].values.tolist()
+
 # 生成不重复的节点与边
 nodes = list(set(classes + classrooms))
 weights = [(df.loc[index,'class'],df.loc[index,'classroom'])for index in df.index]

@@ -85,6 +85,7 @@ vec = CountVectorizer(
     max_features=20000  # 特征取高
 )
 vec.fit(x_train)
+classifier = MultinomialNB()  # 用朴素贝叶斯的多项式模型进行训练
 classifier.fit(vec.transform(x_train), y_train)
 print(classifier.score(vec.transform(x_test), y_test))
 

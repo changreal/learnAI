@@ -13,8 +13,9 @@ import matplotlib.pyplot as plt
 dir = "./"
 file_desc = "".join([dir,'car.csv'])
 stop_words = "".join([dir,'stopwords.txt'])
+
 df = pd.read_csv(file_desc, encoding='gbk')
-stopwords=pd.read_csv(stop_words,index_col=False,quoting=3,sep="\t",names=['stopword'], encoding='utf-8')
+stopwords=pd.read_csv(stop_words,index_col=False,quoting=3,sep="\t",names=['stopword'], encoding='utf-8')  # 指定列名
 stopwords=stopwords['stopword'].values  # .column.values以array形式返回指定column的所有取值  array([,,,])
 
 # 预处理
@@ -36,7 +37,8 @@ for line in lines:
 
 # 构建词袋模型
 dictionary = corpora.Dictionary(sentences)
-corpus = [dictionary.doc2bow(sentence) for sentence in sentences]  # .doc2bow是把文档doc变成一个系数向量
+corpus = [dictionary.doc2bow(sentence) for sentence in sentences]  # .doc2bow是把文档doc变成一个稀疏向量，词袋模型;list 形如[[(1,2),(4,1)],[]]
+# lda模型
 lda = gensim.models.ldamodel.LdaModel(corpus=corpus, id2word=dictionary, num_topics=10)  # num_topics是主题个数，这里定义10个
 print(lda.print_topic(3, topn=5))  # 查看第1号分类，最长出现的5个词
 for topic in lda.print_topics(num_topics=10, num_words=8):
